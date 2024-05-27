@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page | Diorukoshi</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico"> <!-- Favicon link -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('background.gif');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .progress-bar {
+            width: 80%; /* Adjusted width */
+            height: 5px;
+            background-color: #ccc;
+            position: fixed;
+            bottom: 20px; /* Adjusted position */
+            left: 50%; /* Centered horizontally */
+            transform: translateX(-50%); /* Centered horizontally */
+            z-index: 9999;
+            border: 2px solid #000; /* Added border */
+            border-radius: 30px; /* Rounded corners */
+            overflow: hidden; /* Hide overflow to round corners */
+        }
+
+        .progress {
+            height: 100%;
+            background-color: #de0700; /* Red color */
+            width: 4%;
+        }
+
+        .progress-text {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+</head>
+<body>
+    <div class="container">
+        <div class="logo" oncontextmenu="return false;">
+            <img src="logo.png" alt="Logo">
+        </div>
+        <div class="social-media-icons">
+    <a href="https://x.com/diorukoshi" target="_blank">
+        <img src="x.png" alt="X" class="social-media-icon">
+    </a>
+    <a href="https://instagram.com/diorukoshi/" target="_blank">
+        <img src="instagram.png" alt="Instagram" class="social-media-icon">
+    </a>
+        </div>
+        <div class="header">
+            <h1 class="header-text" style="color: white;">Characters</h1>
+        </div>
+        <div class="characters-wrapper">
+            <div class="characters">
+                <!-- Characters 1 to 16 -->
+                <div class="character" data-profile="profile1.jpg">
+                    <img src="character1.jpg" alt="Character 1">
+                </div>
+                <div class="character" data-profile="profile2.jpg">
+                    <img src="character2.jpg" alt="Character 2">
+                </div>
+                <div class="character" data-profile="profile3.jpg">
+                    <img src="character3.jpg" alt="Character 3">
+                </div>
+                <div class="character" data-profile="profile4.jpg">
+                    <img src="character4.jpg" alt="Character 4">
+                </div>
+                <div class="character" onclick="showFullImage('character5.jpg')">
+                    <img src="character5.jpg" alt="Character 5">
+                </div>
+                <div class="character" onclick="showFullImage('character6.jpg')">
+                    <img src="character6.jpg" alt="Character 6">
+                </div>
+                <div class="character" onclick="showFullImage('character7.jpg')">
+                    <img src="character7.jpg" alt="Character 7">
+                </div>
+                <div class="character" onclick="showFullImage('character8.jpg')">
+                    <img src="character8.jpg" alt="Character 8">
+                </div>
+                <div class="character" onclick="showFullImage('character9.jpg')">
+                    <img src="character9.jpg" alt="Character 9">
+                </div>
+                <div class="character" onclick="showFullImage('character10.jpg')">
+                    <img src="character10.jpg" alt="Character 10">
+                </div>
+                <div class="character" onclick="showFullImage('character11.jpg')">
+                    <img src="character11.jpg" alt="Character 11">
+                </div>
+                <div class="character" onclick="showFullImage('character12.jpg')">
+                    <img src="character12.jpg" alt="Character 12">
+                </div>
+                <div class="character" onclick="showFullImage('character13.jpg')">
+                    <img src="character13.jpg" alt="Character 13">
+                </div>
+                <div class="character" onclick="showFullImage('character14.jpg')">
+                    <img src="character14.jpg" alt="Character 14">
+                </div>
+                <div class="character" onclick="showFullImage('character15.jpg')">
+                    <img src="character15.jpg" alt="Character 15">
+                </div>
+                <div class="character" onclick="showFullImage('character16.jpg')">
+                    <img src="character16.jpg" alt="Character 16">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="fullImageOverlay" onclick="hideFullImage()">
+        <div id="fullImageContainer">
+            <div id="closeButton" onclick="hideFullImage()">&times;</div> <!-- Close button -->
+        </div>
+    </div> <!-- Full Image Overlay -->
+    <div class="progress-bar">
+        <div class="progress"></div>
+    </div> <!-- Progress Bar -->
+    <div class="progress-text">Progress: 4%</div> <!-- Progress text -->
+    <script src="script.js"></script>
+</body>
+</html>
