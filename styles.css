@@ -216,8 +216,7 @@ body {
 }
 
 .character:nth-child(7) {
-    border: 2px solid;
-    border: solid #07cc14; /* Seventh character */
+    border: 2px solid #07cc14; /* Seventh character */
 }
 
 
