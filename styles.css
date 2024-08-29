@@ -79,27 +79,22 @@ body {
 
 .characters {
     display: flex;
-    flex-wrap: wrap; /* Wrap characters to new lines */
-    justify-content: space-between;
+    flex-wrap: nowrap; /* Prevent wrapping */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    scroll-snap-type: x mandatory; /* Snap to items while scrolling */
 }
 
 .character {
-    flex: 0 1 45%; /* Responsive width, 45% of the container */
-    max-width: 300px; /* Limit the width on larger screens */
-    height: auto;
-    margin-bottom: 5vh; /* Responsive margin */
+    flex: 0 0 auto; /* Prevent shrinking */
+    width: 300px; /* Fixed width */
+    height: 450px; /* Fixed height */
+    margin-right: 20px; /* Space between characters */
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     position: relative;
-}
-
-.character:nth-child(odd) {
-    margin-top: -2vh; /* Responsive top margin */
-}
-
-.character:nth-child(even) {
-    margin-top: 2vh;
+    scroll-snap-align: center; /* Snap items to the center */
 }
 
 .character img {
@@ -248,10 +243,19 @@ body {
         width: 100%;
     }
 
+    .characters-wrapper {
+        padding-top: 2vh; /* Adjust padding for smaller screens */
+    }
+
+    .characters {
+        overflow-x: scroll; /* Ensure horizontal scrolling */
+        padding-bottom: 2vh; /* Avoid clipping on small screens */
+    }
+
     .character {
-        flex: 0 1 100%; /* Full width on small screens */
-        margin-right: 0;
-        margin-bottom: 2vh;
+        width: 80%; /* Adjust width on smaller screens */
+        height: auto; /* Allow height to be flexible */
+        margin-right: 10px; /* Slightly reduce margin */
     }
 
     .header-text {
