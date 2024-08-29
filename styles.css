@@ -1,26 +1,32 @@
+/* Base Styles */
 body {
     font-family: 'Roboto Condensed', Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f0f0f0;
     overflow-x: hidden !important; /* Hide horizontal scrollbar */
-    overflow-y: auto !important; /* Enable vertical scrollbar */}
-
-.container {
-    width: 80%;
-    margin: 0 auto;
-    padding-top: 20px;
-    overflow: hidden; /* Hide both vertical and horizontal scrollbars */
+    overflow-y: auto !important; /* Enable vertical scrollbar */
 }
 
+/* Container */
+.container {
+    width: 90%; /* Make container responsive */
+    max-width: 1200px; /* Limit max width on larger screens */
+    margin: 0 auto;
+    padding-top: 5vh; /* Responsive padding */
+    overflow: hidden;
+}
+
+/* Logo */
 .logo {
     text-align: center;
-    margin-bottom: 40px; /* Increased space between logo and characters */
-    position: relative; /* Ensure relative positioning */
+    margin-bottom: 5vh; /* Adjust margin for responsiveness */
+    position: relative;
 }
 
 .logo img {
-    width: 350px;
+    width: 80%; /* Make logo responsive */
+    max-width: 350px; /* Limit the size */
     height: auto;
 }
 
@@ -31,52 +37,57 @@ body {
     width: 100%;
     height: 100%;
     cursor: default; /* Prevent the pointer from changing to text selection */
-    background: transparent; /* Make the overlay transparent */
-    z-index: 1; /* Ensure it sits above the logo */
+    background: transparent;
+    z-index: 1;
 }
 
+/* Social Media Icons */
 .social-media-icons {
     position: absolute;
-    top: 20px; /* Adjust distance from the top */
-    right: 20px; /* Adjust distance from the right */
+    top: 20px;
+    right: 20px;
 }
 
 .social-media-icon {
     width: 50px; /* Adjust size as needed */
     height: auto;
-    margin-right: 10px; /* Adjust margin as needed */
+    margin-right: 10px;
 }
 
+/* Header */
 .header {
     text-align: center;
-    margin-bottom: 20px; /* Adjust margin as needed */
+    margin-bottom: 5vh; /* Responsive margin */
 }
 
 .header-text {
-    font-size: 45px; /* Adjust font size as needed */
+    font-size: 5vw; /* Responsive font size */
+    max-font-size: 45px; /* Limit the size on large screens */
     text-decoration: underline;
-    text-decoration-thickness: 2px; /* Set the thickness of the underline */
+    text-decoration-thickness: 0.2em;
     text-underline-offset: 8px;
-    font-family: 'Roboto Condensed', Arial, sans-serif; /* Specify the font family */
     font-weight: 350;
-    user-select: none; /* Prevent selection for characters and their images */
+    user-select: none;
 }
 
+/* Characters Section */
 .characters-wrapper {
-    overflow: hidden; /* Hide both vertical and horizontal scrollbars */
-    padding-top: 40px; /* Add padding to the top to prevent cropping */
-    height: 490px; /* Increase height to accommodate the staggered characters */
+    overflow: hidden;
+    padding-top: 5vh; /* Responsive padding */
+    height: auto; /* Allow height to adjust naturally */
 }
 
 .characters {
     display: flex;
+    flex-wrap: wrap; /* Wrap characters to new lines */
+    justify-content: space-between;
 }
 
 .character {
-    flex: 0 0 auto;
-    width: 300px;
-    height: 450px;
-    margin-right: 20px;
+    flex: 0 1 45%; /* Responsive width, 45% of the container */
+    max-width: 300px; /* Limit the width on larger screens */
+    height: auto;
+    margin-bottom: 5vh; /* Responsive margin */
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -84,11 +95,11 @@ body {
 }
 
 .character:nth-child(odd) {
-    margin-top: -20px; /* Move odd items up */
+    margin-top: -2vh; /* Responsive top margin */
 }
 
 .character:nth-child(even) {
-    margin-top: 20px; /* Move even items down */
+    margin-top: 2vh;
 }
 
 .character img {
@@ -96,30 +107,29 @@ body {
     height: 100%;
     object-fit: cover;
     transition: filter 0.3s ease, transform 0.3s ease;
-    filter: saturate(50%); /* Reduced saturation by default */
-    user-select: none; /* Prevent selection for characters and their images */
+    filter: saturate(50%);
+    user-select: none;
 }
 
 .character:hover img {
-    filter: saturate(100%); /* Increased saturation on hover */
-    transform: scale(1.1); /* Enlarge the image a bit more on hover */
-    cursor: pointer; /* Change cursor to pointer on hover */
+    filter: saturate(100%);
+    transform: scale(1.1);
+    cursor: pointer;
 }
 
+/* Pixel Sprite */
 .pixel-sprite {
     position: fixed;
-    width: 60px; /* Adjust size as needed */
-    height: 60px; /* Adjust size as needed */
+    width: 60px;
+    height: 60px;
     background-size: cover;
     background-repeat: no-repeat;
     opacity: 0;
-    transition: opacity 0.5s ease; /* Smooth transition for showing/hiding */
-    z-index: 10000; /* Ensure it sits above other elements */
+    transition: opacity 0.5s ease;
+    z-index: 10000;
 }
 
-
-
-/* New styles for full image overlay */
+/* Full Image Overlay */
 #fullImageOverlay {
     display: none;
     position: fixed;
@@ -127,14 +137,14 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.99); /* Dark background color */
+    background-color: rgba(0, 0, 0, 0.99);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    z-index: 9999; /* Ensure it's on top of everything */
+    z-index: 9999;
     opacity: 0;
-    animation: fadeIn 0.5s forwards; /* Apply fade-in animation */
-    cursor: default; /* Default cursor */
+    animation: fadeIn 0.5s forwards;
+    cursor: default;
 }
 
 #fullImageContainer {
@@ -145,19 +155,21 @@ body {
 }
 
 #leftPixelSprite {
-    left: 20px; /* Position near the left edge */
-    top: 50%; /* Center vertically */
+    left: 20px;
+    top: 50%;
     transform: translateY(-50%);
 }
 
 #rightPixelSprite {
-    right: 20px; /* Position near the right edge */
-    top: 50%; /* Center vertically */
+    right: 20px;
+    top: 50%;
     transform: translateY(-50%);
 }
+
+/* Arrows */
 .arrows {
     position: absolute;
-    top: calc(50% - 10px); /* Adjust position vertically */
+    top: calc(50% - 10px);
 }
 
 .arrow-left, .arrow-right {
@@ -169,56 +181,56 @@ body {
 }
 
 .arrow-left {
-    border-right: 10px solid #000; /* Adjust color and size as needed */
-    margin-right: 10px; /* Adjust spacing between arrows */
+    border-right: 10px solid #000;
+    margin-right: 10px;
 }
 
 .arrow-right {
-    border-left: 10px solid #000; /* Adjust color and size as needed */
-    margin-left: 10px; /* Adjust spacing between arrows */
+    border-left: 10px solid #000;
+    margin-left: 10px;
 }
+
 #closeButton {
-    font-size: 40px; /* Increase close button size */
+    font-size: 6vw; /* Responsive font size */
     color: #fff;
     position: absolute;
     top: 20px;
     right: 20px;
     cursor: pointer;
-    user-select: none; /* Prevent text selection */
+    user-select: none;
     opacity: 0;
-    animation: fadeIn 0.5s 0.3s forwards; /* Apply fade-in animation with delay */
+    animation: fadeIn 0.5s 0.3s forwards;
 }
 
-/* Add borders with different colors to each character */
+/* Borders for Characters */
 .character:nth-child(1) {
-    border: 2px solid #652e2d; /* First character */
+    border: 2px solid #652e2d;
 }
 
 .character:nth-child(2) {
-    border: 2px solid #5f6b85; /* Second character */
+    border: 2px solid #5f6b85;
 }
 
 .character:nth-child(3) {
-    border: 2px solid #82392d; /* Third character */
+    border: 2px solid #82392d;
 }
 
 .character:nth-child(4) {
-    border: 2px solid #d66047; /* Fourth character */
+    border: 2px solid #d66047;
 }
 
 .character:nth-child(5) {
-    border: 2px solid #c6c6c6; /* Fifth character */
+    border: 2px solid #c6c6c6;
 }
 
 .character:nth-child(6) {
     border: 2px solid;
-    border-image: linear-gradient(-45deg, #6f2234, #57426e) 1; /* Sixth character */
+    border-image: linear-gradient(-45deg, #6f2234, #57426e) 1;
 }
 
 .character:nth-child(7) {
-    border: 2px solid #07cc14; /* Seventh character */
+    border: 2px solid #07cc14;
 }
-
 
 /* Keyframes for fade-in animation */
 @keyframes fadeIn {
@@ -230,13 +242,19 @@ body {
     }
 }
 
+/* Responsive Styles for Small Screens */
 @media only screen and (max-width: 600px) {
-    .character {
-        width: 100%; /* Make characters full width */
-        height: auto; /* Allow height to adjust according to aspect ratio */
+    .container {
+        width: 100%;
     }
 
-    .talent-overlay img {
-        max-width: 50%; /* Adjust maximum width of overlay images */
+    .character {
+        flex: 0 1 100%; /* Full width on small screens */
+        margin-right: 0;
+        margin-bottom: 2vh;
+    }
+
+    .header-text {
+        font-size: 7vw; /* Slightly larger font on small screens */
     }
 }
