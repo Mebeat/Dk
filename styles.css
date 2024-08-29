@@ -1,3 +1,6 @@
+/* Ensure Font Loading in HTML */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
+
 /* Base Styles */
 body {
     font-family: 'Roboto Condensed', Arial, sans-serif;
@@ -61,12 +64,12 @@ body {
 }
 
 .header-text {
-    font-size: 5vw; /* Responsive font size */
-    max-font-size: 45px; /* Limit the size on large screens */
+    font-family: 'Roboto Condensed', Arial, sans-serif; /* Apply Roboto Condensed */
+    font-size: 45px; /* Use a fixed size for consistency */
     text-decoration: underline;
-    text-decoration-thickness: 0.2em;
-    text-underline-offset: 8px;
-    font-weight: 350;
+    text-decoration-thickness: 2px; /* Set a specific underline thickness */
+    text-underline-offset: 8px; /* Ensure the underline is offset correctly */
+    font-weight: 400; /* Set the correct font weight */
     user-select: none;
 }
 
@@ -259,6 +262,8 @@ body {
     }
 
     .header-text {
-        font-size: 7vw; /* Slightly larger font on small screens */
+        font-size: 40px; /* Slightly reduce font size on small screens */
+        text-decoration-thickness: 2px; /* Maintain underline thickness */
+        text-underline-offset: 6px; /* Adjust offset for smaller font size */
     }
 }
