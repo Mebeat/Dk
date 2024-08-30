@@ -2,6 +2,9 @@
     --font-size-base: 1rem; /* Base font size */
     --spacing-base: 1rem; /* Base spacing unit */
     --border-width: 0.125rem; /* 2px border converted to rem */
+    --logo-max-width: 30vw; /* Max width of logo relative to viewport */
+    --character-width: 15vw; /* Width of character holder relative to viewport */
+    --character-height: 25vh; /* Height of character holder relative to viewport */
 }
 
 body {
@@ -23,12 +26,12 @@ body {
 
 .logo {
     text-align: center;
-    margin-bottom: calc(var(--spacing-base) * 4); /* Increased space between logo and characters */
+    margin-bottom: calc(var(--spacing-base) * 4); /* Space between logo and characters */
     position: relative; /* Ensure relative positioning */
 }
 
 .logo img {
-    max-width: 100%;
+    max-width: var(--logo-max-width); /* Constrain logo size */
     height: auto;
 }
 
@@ -73,30 +76,23 @@ body {
 .characters-wrapper {
     overflow: hidden; /* Hide both vertical and horizontal scrollbars */
     padding-top: calc(var(--spacing-base) * 4); /* Add padding to the top to prevent cropping */
-    height: 30vh; /* Adjust height to accommodate the staggered characters */
+    height: auto; /* Allow height to adjust according to content */
 }
 
 .characters {
     display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-base); /* Space between character holders */
 }
 
 .character {
     flex: 0 0 auto;
-    width: 18vw;
-    height: 30vh;
-    margin-right: var(--spacing-base);
+    width: var(--character-width); /* Maintain width */
+    height: var(--character-height); /* Maintain height */
     background-color: #fff;
     box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
     overflow: hidden;
     position: relative;
-}
-
-.character:nth-child(odd) {
-    margin-top: calc(var(--spacing-base) * -2); /* Move odd items up */
-}
-
-.character:nth-child(even) {
-    margin-top: calc(var(--spacing-base) * 2); /* Move even items down */
 }
 
 .character img {
