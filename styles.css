@@ -1,34 +1,26 @@
-/* Ensure Font Loading in HTML */
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
-
-/* Base Styles */
 body {
     font-family: 'Roboto Condensed', Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f0f0f0;
     overflow-x: hidden !important; /* Hide horizontal scrollbar */
-    overflow-y: auto !important; /* Enable vertical scrollbar */
-}
+    overflow-y: auto !important; /* Enable vertical scrollbar */}
 
-/* Container */
 .container {
-    width: 80%; /* Base width for desktop */
-    max-width: 1200px; /* Limit max width on larger screens */
+    width: 80%;
     margin: 0 auto;
-    padding-top: 20px; /* Standard padding for desktop */
-    overflow: hidden;
+    padding-top: 20px;
+    overflow: hidden; /* Hide both vertical and horizontal scrollbars */
 }
 
-/* Logo */
 .logo {
     text-align: center;
-    margin-bottom: 40px; /* Standard margin for desktop */
-    position: relative;
+    margin-bottom: 40px; /* Increased space between logo and characters */
+    position: relative; /* Ensure relative positioning */
 }
 
 .logo img {
-    width: 350px; /* Fixed width for desktop */
+    width: 350px;
     height: auto;
 }
 
@@ -39,64 +31,64 @@ body {
     width: 100%;
     height: 100%;
     cursor: default; /* Prevent the pointer from changing to text selection */
-    background: transparent;
-    z-index: 1;
+    background: transparent; /* Make the overlay transparent */
+    z-index: 1; /* Ensure it sits above the logo */
 }
 
-/* Social Media Icons */
 .social-media-icons {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 20px; /* Adjust distance from the top */
+    right: 20px; /* Adjust distance from the right */
 }
 
 .social-media-icon {
     width: 50px; /* Adjust size as needed */
     height: auto;
-    margin-right: 10px;
+    margin-right: 10px; /* Adjust margin as needed */
 }
 
-/* Header */
 .header {
     text-align: center;
-    margin-bottom: 20px; /* Standard margin for desktop */
+    margin-bottom: 20px; /* Adjust margin as needed */
 }
 
 .header-text {
-    font-family: 'Roboto Condensed', Arial, sans-serif; /* Apply Roboto Condensed */
-    font-size: 45px; /* Fixed font size for desktop */
+    font-size: 45px; /* Adjust font size as needed */
     text-decoration: underline;
-    text-decoration-thickness: 2px; /* Set a specific underline thickness */
-    text-underline-offset: 8px; /* Ensure the underline is offset correctly */
-    font-weight: 300; /* Set the correct font weight */
-    user-select: none;
+    text-decoration-thickness: 2px; /* Set the thickness of the underline */
+    text-underline-offset: 8px;
+    font-family: 'Roboto Condensed', Arial, sans-serif; /* Specify the font family */
+    font-weight: 350;
+    user-select: none; /* Prevent selection for characters and their images */
 }
 
-/* Characters Section */
 .characters-wrapper {
-    overflow: hidden;
-    padding-top: 40px; /* Standard padding for desktop */
-    height: auto; /* Allow height to adjust naturally */
+    overflow: hidden; /* Hide both vertical and horizontal scrollbars */
+    padding-top: 40px; /* Add padding to the top to prevent cropping */
+    height: 490px; /* Increase height to accommodate the staggered characters */
 }
 
 .characters {
     display: flex;
-    flex-wrap: nowrap; /* Prevent wrapping */
-    overflow-x: auto; /* Enable horizontal scrolling */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    scroll-snap-type: x mandatory; /* Snap to items while scrolling */
 }
 
 .character {
-    flex: 0 0 auto; /* Prevent shrinking */
-    width: 300px; /* Fixed width */
-    height: 450px; /* Fixed height */
-    margin-right: 20px; /* Space between characters */
+    flex: 0 0 auto;
+    width: 300px;
+    height: 450px;
+    margin-right: 20px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     position: relative;
-    scroll-snap-align: center; /* Snap items to the center */
+}
+
+.character:nth-child(odd) {
+    margin-top: -20px; /* Move odd items up */
+}
+
+.character:nth-child(even) {
+    margin-top: 20px; /* Move even items down */
 }
 
 .character img {
@@ -104,29 +96,30 @@ body {
     height: 100%;
     object-fit: cover;
     transition: filter 0.3s ease, transform 0.3s ease;
-    filter: saturate(50%);
-    user-select: none;
+    filter: saturate(50%); /* Reduced saturation by default */
+    user-select: none; /* Prevent selection for characters and their images */
 }
 
 .character:hover img {
-    filter: saturate(100%);
-    transform: scale(1.1);
-    cursor: pointer;
+    filter: saturate(100%); /* Increased saturation on hover */
+    transform: scale(1.1); /* Enlarge the image a bit more on hover */
+    cursor: pointer; /* Change cursor to pointer on hover */
 }
 
-/* Pixel Sprite */
 .pixel-sprite {
     position: fixed;
-    width: 60px;
-    height: 60px;
+    width: 60px; /* Adjust size as needed */
+    height: 60px; /* Adjust size as needed */
     background-size: cover;
     background-repeat: no-repeat;
     opacity: 0;
-    transition: opacity 0.5s ease;
-    z-index: 10000;
+    transition: opacity 0.5s ease; /* Smooth transition for showing/hiding */
+    z-index: 10000; /* Ensure it sits above other elements */
 }
 
-/* Full Image Overlay */
+
+
+/* New styles for full image overlay */
 #fullImageOverlay {
     display: none;
     position: fixed;
@@ -134,14 +127,14 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.99);
+    background-color: rgba(0, 0, 0, 0.99); /* Dark background color */
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    z-index: 9999;
+    z-index: 9999; /* Ensure it's on top of everything */
     opacity: 0;
-    animation: fadeIn 0.5s forwards;
-    cursor: default;
+    animation: fadeIn 0.5s forwards; /* Apply fade-in animation */
+    cursor: default; /* Default cursor */
 }
 
 #fullImageContainer {
@@ -152,21 +145,19 @@ body {
 }
 
 #leftPixelSprite {
-    left: 20px;
-    top: 50%;
+    left: 20px; /* Position near the left edge */
+    top: 50%; /* Center vertically */
     transform: translateY(-50%);
 }
 
 #rightPixelSprite {
-    right: 20px;
-    top: 50%;
+    right: 20px; /* Position near the right edge */
+    top: 50%; /* Center vertically */
     transform: translateY(-50%);
 }
-
-/* Arrows */
 .arrows {
     position: absolute;
-    top: calc(50% - 10px);
+    top: calc(50% - 10px); /* Adjust position vertically */
 }
 
 .arrow-left, .arrow-right {
@@ -178,56 +169,56 @@ body {
 }
 
 .arrow-left {
-    border-right: 10px solid #000;
-    margin-right: 10px;
+    border-right: 10px solid #000; /* Adjust color and size as needed */
+    margin-right: 10px; /* Adjust spacing between arrows */
 }
 
 .arrow-right {
-    border-left: 10px solid #000;
-    margin-left: 10px;
+    border-left: 10px solid #000; /* Adjust color and size as needed */
+    margin-left: 10px; /* Adjust spacing between arrows */
 }
-
 #closeButton {
-    font-size: 40px; /* Standard font size for desktop */
+    font-size: 40px; /* Increase close button size */
     color: #fff;
     position: absolute;
     top: 20px;
     right: 20px;
     cursor: pointer;
-    user-select: none;
+    user-select: none; /* Prevent text selection */
     opacity: 0;
-    animation: fadeIn 0.5s 0.3s forwards;
+    animation: fadeIn 0.5s 0.3s forwards; /* Apply fade-in animation with delay */
 }
 
-/* Borders for Characters */
+/* Add borders with different colors to each character */
 .character:nth-child(1) {
-    border: 2px solid #652e2d;
+    border: 2px solid #652e2d; /* First character */
 }
 
 .character:nth-child(2) {
-    border: 2px solid #5f6b85;
+    border: 2px solid #5f6b85; /* Second character */
 }
 
 .character:nth-child(3) {
-    border: 2px solid #82392d;
+    border: 2px solid #82392d; /* Third character */
 }
 
 .character:nth-child(4) {
-    border: 2px solid #d66047;
+    border: 2px solid #d66047; /* Fourth character */
 }
 
 .character:nth-child(5) {
-    border: 2px solid #c6c6c6;
+    border: 2px solid #c6c6c6; /* Fifth character */
 }
 
 .character:nth-child(6) {
     border: 2px solid;
-    border-image: linear-gradient(-45deg, #6f2234, #57426e) 1;
+    border-image: linear-gradient(-45deg, #6f2234, #57426e) 1; /* Sixth character */
 }
 
 .character:nth-child(7) {
-    border: 2px solid #07cc14;
+    border: 2px solid #07cc14; /* Seventh character */
 }
+
 
 /* Keyframes for fade-in animation */
 @keyframes fadeIn {
@@ -239,40 +230,13 @@ body {
     }
 }
 
-/* Responsive Styles for Small Screens */
 @media only screen and (max-width: 600px) {
-    .container {
-        width: 90%; /* Increase width for smaller screens */
-        padding-top: 5vh; /* Adjust padding for smaller screens */
-    }
-
-    .logo img {
-        width: 80%; /* Make logo responsive on mobile */
-        max-width: 350px;
-    }
-
-    .header-text {
-        font-size: 40px; /* Slightly reduce font size on small screens */
-        text-decoration-thickness: 2px; /* Maintain underline thickness */
-        text-underline-offset: 6px; /* Adjust offset for smaller font size */
-    }
-
-    .characters-wrapper {
-        padding-top: 5vh; /* Responsive padding */
-    }
-
-    .characters {
-        overflow-x: scroll; /* Ensure horizontal scrolling */
-        padding-bottom: 2vh; /* Avoid clipping on small screens */
-    }
-
     .character {
-        width: 80%; /* Adjust width on smaller screens */
-        height: auto; /* Allow height to be flexible */
-        margin-right: 10px; /* Slightly reduce margin */
+        width: 100%; /* Make characters full width */
+        height: auto; /* Allow height to adjust according to aspect ratio */
     }
 
-    #closeButton {
-        font-size: 6vw; /* Responsive font size for close button */
+    .talent-overlay img {
+        max-width: 50%; /* Adjust maximum width of overlay images */
     }
 }
