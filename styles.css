@@ -13,23 +13,22 @@ body {
 
 /* Container */
 .container {
-    width: 90%; /* Make container responsive */
+    width: 80%; /* Base width for desktop */
     max-width: 1200px; /* Limit max width on larger screens */
     margin: 0 auto;
-    padding-top: 5vh; /* Responsive padding */
+    padding-top: 20px; /* Standard padding for desktop */
     overflow: hidden;
 }
 
 /* Logo */
 .logo {
     text-align: center;
-    margin-bottom: 5vh; /* Adjust margin for responsiveness */
+    margin-bottom: 40px; /* Standard margin for desktop */
     position: relative;
 }
 
 .logo img {
-    width: 80%; /* Make logo responsive */
-    max-width: 350px; /* Limit the size */
+    width: 350px; /* Fixed width for desktop */
     height: auto;
 }
 
@@ -60,12 +59,12 @@ body {
 /* Header */
 .header {
     text-align: center;
-    margin-bottom: 5vh; /* Responsive margin */
+    margin-bottom: 20px; /* Standard margin for desktop */
 }
 
 .header-text {
     font-family: 'Roboto Condensed', Arial, sans-serif; /* Apply Roboto Condensed */
-    font-size: 45px; /* Use a fixed size for consistency */
+    font-size: 45px; /* Fixed font size for desktop */
     text-decoration: underline;
     text-decoration-thickness: 2px; /* Set a specific underline thickness */
     text-underline-offset: 8px; /* Ensure the underline is offset correctly */
@@ -76,7 +75,7 @@ body {
 /* Characters Section */
 .characters-wrapper {
     overflow: hidden;
-    padding-top: 5vh; /* Responsive padding */
+    padding-top: 40px; /* Standard padding for desktop */
     height: auto; /* Allow height to adjust naturally */
 }
 
@@ -189,7 +188,7 @@ body {
 }
 
 #closeButton {
-    font-size: 6vw; /* Responsive font size */
+    font-size: 40px; /* Standard font size for desktop */
     color: #fff;
     position: absolute;
     top: 20px;
@@ -243,11 +242,23 @@ body {
 /* Responsive Styles for Small Screens */
 @media only screen and (max-width: 600px) {
     .container {
-        width: 100%;
+        width: 90%; /* Increase width for smaller screens */
+        padding-top: 5vh; /* Adjust padding for smaller screens */
+    }
+
+    .logo img {
+        width: 80%; /* Make logo responsive on mobile */
+        max-width: 350px;
+    }
+
+    .header-text {
+        font-size: 40px; /* Slightly reduce font size on small screens */
+        text-decoration-thickness: 2px; /* Maintain underline thickness */
+        text-underline-offset: 6px; /* Adjust offset for smaller font size */
     }
 
     .characters-wrapper {
-        padding-top: 2vh; /* Adjust padding for smaller screens */
+        padding-top: 5vh; /* Responsive padding */
     }
 
     .characters {
@@ -261,9 +272,7 @@ body {
         margin-right: 10px; /* Slightly reduce margin */
     }
 
-    .header-text {
-        font-size: 40px; /* Slightly reduce font size on small screens */
-        text-decoration-thickness: 2px; /* Maintain underline thickness */
-        text-underline-offset: 6px; /* Adjust offset for smaller font size */
+    #closeButton {
+        font-size: 6vw; /* Responsive font size for close button */
     }
 }
