@@ -4,23 +4,24 @@ body {
     padding: 0;
     background-color: #f0f0f0;
     overflow-x: hidden !important; /* Hide horizontal scrollbar */
-    overflow-y: auto !important; /* Enable vertical scrollbar */}
+    overflow-y: auto !important; /* Enable vertical scrollbar */
+}
 
 .container {
     width: 80%;
     margin: 0 auto;
-    padding-top: 20px;
+    padding-top: 2rem;
     overflow: hidden; /* Hide both vertical and horizontal scrollbars */
 }
 
 .logo {
     text-align: center;
-    margin-bottom: 40px; /* Increased space between logo and characters */
+    margin-bottom: 4rem; /* Increased space between logo and characters */
     position: relative; /* Ensure relative positioning */
 }
 
 .logo img {
-    width: 350px;
+    width: 18vw; /* Make logo size relative to viewport width */
     height: auto;
 }
 
@@ -37,26 +38,26 @@ body {
 
 .social-media-icons {
     position: absolute;
-    top: 20px; /* Adjust distance from the top */
-    right: 20px; /* Adjust distance from the right */
+    top: 2rem; /* Adjust distance from the top */
+    right: 2rem; /* Adjust distance from the right */
 }
 
 .social-media-icon {
-    width: 50px; /* Adjust size as needed */
+    width: 2.6rem; /* Adjust size as needed */
     height: auto;
-    margin-right: 10px; /* Adjust margin as needed */
+    margin-right: 1rem; /* Adjust margin as needed */
 }
 
 .header {
     text-align: center;
-    margin-bottom: 20px; /* Adjust margin as needed */
+    margin-bottom: 2rem; /* Adjust margin as needed */
 }
 
 .header-text {
-    font-size: 45px; /* Adjust font size as needed */
+    font-size: 3vw; /* Adjust font size as needed */
     text-decoration: underline;
-    text-decoration-thickness: 2px; /* Set the thickness of the underline */
-    text-underline-offset: 8px;
+    text-decoration-thickness: 0.2rem; /* Set the thickness of the underline */
+    text-underline-offset: 0.8rem;
     font-family: 'Roboto Condensed', Arial, sans-serif; /* Specify the font family */
     font-weight: 350;
     user-select: none; /* Prevent selection for characters and their images */
@@ -64,19 +65,21 @@ body {
 
 .characters-wrapper {
     overflow: hidden; /* Hide both vertical and horizontal scrollbars */
-    padding-top: 40px; /* Add padding to the top to prevent cropping */
-    height: 490px; /* Increase height to accommodate the staggered characters */
+    padding-top: 4rem; /* Add padding to the top to prevent cropping */
+    height: 40vh; /* Increase height to accommodate the staggered characters */
 }
 
 .characters {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the characters */
 }
 
 .character {
-    flex: 0 0 auto;
-    width: 300px;
-    height: 450px;
-    margin-right: 20px;
+    flex: 0 0 calc(25% - 1rem); /* 4 characters per row, adjust for margin */
+    height: 40vh;
+    margin-right: 1rem;
+    margin-bottom: 2rem;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -84,11 +87,11 @@ body {
 }
 
 .character:nth-child(odd) {
-    margin-top: -20px; /* Move odd items up */
+    margin-top: -2rem; /* Move odd items up */
 }
 
 .character:nth-child(even) {
-    margin-top: 20px; /* Move even items down */
+    margin-top: 2rem; /* Move even items down */
 }
 
 .character img {
@@ -108,16 +111,14 @@ body {
 
 .pixel-sprite {
     position: fixed;
-    width: 60px; /* Adjust size as needed */
-    height: 60px; /* Adjust size as needed */
+    width: 3.5vw; /* Adjust size as needed */
+    height: 3.5vw; /* Adjust size as needed */
     background-size: cover;
     background-repeat: no-repeat;
     opacity: 0;
     transition: opacity 0.5s ease; /* Smooth transition for showing/hiding */
     z-index: 10000; /* Ensure it sits above other elements */
 }
-
-
 
 /* New styles for full image overlay */
 #fullImageOverlay {
@@ -145,44 +146,46 @@ body {
 }
 
 #leftPixelSprite {
-    left: 20px; /* Position near the left edge */
+    left: 2rem; /* Position near the left edge */
     top: 50%; /* Center vertically */
     transform: translateY(-50%);
 }
 
 #rightPixelSprite {
-    right: 20px; /* Position near the right edge */
+    right: 2rem; /* Position near the right edge */
     top: 50%; /* Center vertically */
     transform: translateY(-50%);
 }
+
 .arrows {
     position: absolute;
-    top: calc(50% - 10px); /* Adjust position vertically */
+    top: calc(50% - 1rem); /* Adjust position vertically */
 }
 
 .arrow-left, .arrow-right {
     width: 0;
     height: 0;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
+    border-top: 1rem solid transparent;
+    border-bottom: 1rem solid transparent;
     cursor: pointer;
 }
 
 .arrow-left {
-    border-right: 10px solid #000; /* Adjust color and size as needed */
-    margin-right: 10px; /* Adjust spacing between arrows */
+    border-right: 1rem solid #000; /* Adjust color and size as needed */
+    margin-right: 1rem; /* Adjust spacing between arrows */
 }
 
 .arrow-right {
-    border-left: 10px solid #000; /* Adjust color and size as needed */
-    margin-left: 10px; /* Adjust spacing between arrows */
+    border-left: 1rem solid #000; /* Adjust color and size as needed */
+    margin-left: 1rem; /* Adjust spacing between arrows */
 }
+
 #closeButton {
-    font-size: 40px; /* Increase close button size */
+    font-size: 4rem; /* Increase close button size */
     color: #fff;
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 2rem;
+    right: 2rem;
     cursor: pointer;
     user-select: none; /* Prevent text selection */
     opacity: 0;
@@ -191,34 +194,33 @@ body {
 
 /* Add borders with different colors to each character */
 .character:nth-child(1) {
-    border: 2px solid #652e2d; /* First character */
+    border: 0.2rem solid #652e2d; /* First character */
 }
 
 .character:nth-child(2) {
-    border: 2px solid #5f6b85; /* Second character */
+    border: 0.2rem solid #5f6b85; /* Second character */
 }
 
 .character:nth-child(3) {
-    border: 2px solid #82392d; /* Third character */
+    border: 0.2rem solid #82392d; /* Third character */
 }
 
 .character:nth-child(4) {
-    border: 2px solid #d66047; /* Fourth character */
+    border: 0.2rem solid #d66047; /* Fourth character */
 }
 
 .character:nth-child(5) {
-    border: 2px solid #c6c6c6; /* Fifth character */
+    border: 0.2rem solid #c6c6c6; /* Fifth character */
 }
 
 .character:nth-child(6) {
-    border: 2px solid;
+    border: 0.2rem solid;
     border-image: linear-gradient(-45deg, #6f2234, #57426e) 1; /* Sixth character */
 }
 
 .character:nth-child(7) {
-    border: 2px solid #07cc14; /* Seventh character */
+    border: 0.2rem solid #07cc14; /* Seventh character */
 }
-
 
 /* Keyframes for fade-in animation */
 @keyframes fadeIn {
@@ -231,8 +233,12 @@ body {
 }
 
 @media only screen and (max-width: 600px) {
+    .container {
+        width: 90%; /* Increase container width */
+    }
+
     .character {
-        width: 100%; /* Make characters full width */
+        flex: 0 0 100%; /* Make characters full width */
         height: auto; /* Allow height to adjust according to aspect ratio */
     }
 
