@@ -68,7 +68,7 @@ body {
     text-decoration: underline;
     text-decoration-thickness: 2px; /* Set a specific underline thickness */
     text-underline-offset: 8px; /* Ensure the underline is offset correctly */
-    font-weight: 400; /* Set the correct font weight */
+    font-weight: 300; /* Set the correct font weight */
     user-select: none;
 }
 
