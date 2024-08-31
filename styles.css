@@ -219,6 +219,10 @@ body {
     border: 2px solid #07cc14; /* Seventh character */
 }
 
+.character:nth-child(8) {
+    border: 2px solid #6c5c53; /* Eighth character */
+}
+
 
 /* Keyframes for fade-in animation */
 @keyframes fadeIn {
