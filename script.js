@@ -21,6 +21,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Force background to load properly
+    window.addEventListener('load', function() {
+        document.body.style.backgroundImage = 'url("background.gif")';
+    });
+
     // Function to show full profile image on click
     function showFullProfile(profileSrc) {
         const fullImageOverlay = document.getElementById("fullImageOverlay");
@@ -148,7 +153,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Function to show the next character
-    function showNextCharacter() {
+    function showNextCharacter(e) {
+        if (e) {
+            e.stopPropagation(); // Prevent event from bubbling to overlay
+        }
         currentCharacterIndex = (currentCharacterIndex + 1) % characterBoxes.length;
         const characterProfile = characterBoxes[currentCharacterIndex].dataset.profile;
         if (characterProfile) {
@@ -157,7 +165,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Function to show the previous character
-    function showPreviousCharacter() {
+    function showPreviousCharacter(e) {
+        if (e) {
+            e.stopPropagation(); // Prevent event from bubbling to overlay
+        }
         currentCharacterIndex = (currentCharacterIndex - 1 + characterBoxes.length) % characterBoxes.length;
         const characterProfile = characterBoxes[currentCharacterIndex].dataset.profile;
         if (characterProfile) {
@@ -165,18 +176,27 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Add click event listeners to the navigation buttons
+    // Add click event listeners to the desktop navigation buttons
     const leftButton = document.getElementById('leftButton');
     const rightButton = document.getElementById('rightButton');
 
     if (leftButton && rightButton) {
-        leftButton.addEventListener('click', function(e) {
-            e.stopPropagation(); // Prevent event from bubbling to overlay
+        leftButton.addEventListener('click', showPreviousCharacter);
+        rightButton.addEventListener('click', showNextCharacter);
+    }
+    
+    // Add click event listeners to the mobile navigation buttons
+    const mobileLeftButton = document.getElementById('mobileLeftButton');
+    const mobileRightButton = document.getElementById('mobileRightButton');
+    
+    if (mobileLeftButton && mobileRightButton) {
+        mobileLeftButton.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent closing the overlay
             showPreviousCharacter();
         });
         
-        rightButton.addEventListener('click', function(e) {
-            e.stopPropagation(); // Prevent event from bubbling to overlay
+        mobileRightButton.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent closing the overlay
             showNextCharacter();
         });
     }
@@ -222,13 +242,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    // Prevent mobile navigation container from closing the overlay when clicked
+    document.querySelector('.mobile-nav-container').addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+    
     // Resize handling
     function handleResize() {
-        // Adjust character sizes or other responsive elements if needed
+        // Check if we're on mobile and set appropriate classes or styles
         const isMobile = window.innerWidth <= 768;
-        const isSmallMobile = window.innerWidth <= 480;
-        
-        // Any specific adjustments can be made here
     }
     
     window.addEventListener('resize', handleResize);
