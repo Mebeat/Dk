@@ -37,14 +37,38 @@ document.addEventListener('DOMContentLoaded', function() {
         const leftPixelSrc = characterBoxes[currentCharacterIndex].dataset.leftPixel;
         const rightPixelSrc = characterBoxes[currentCharacterIndex].dataset.rightPixel;
 
+        // Get references to mobile buttons for positioning
+        const mobileLeftButton = document.getElementById('mobileLeftButton');
+        const mobileRightButton = document.getElementById('mobileRightButton');
+        const leftPixelSprite = document.getElementById("leftPixelSprite");
+        const rightPixelSprite = document.getElementById("rightPixelSprite");
+
         if (leftPixelSrc) {
-            document.getElementById("leftPixelSprite").style.backgroundImage = "url('" + leftPixelSrc + "')";
-            document.getElementById("leftPixelSprite").style.opacity = "1";
+            leftPixelSprite.style.backgroundImage = "url('" + leftPixelSrc + "')";
+            leftPixelSprite.style.opacity = "1";
+            
+            // Mobile positioning
+            if (window.innerWidth <= 768 && mobileLeftButton) {
+                // Move the sprite to be inside the mobile left button
+                leftPixelSprite.style.position = "absolute";
+                leftPixelSprite.style.left = "50%";
+                leftPixelSprite.style.transform = "translateX(-50%)";
+                mobileLeftButton.appendChild(leftPixelSprite);
+            }
         }
         
         if (rightPixelSrc) {
-            document.getElementById("rightPixelSprite").style.backgroundImage = "url('" + rightPixelSrc + "')";
-            document.getElementById("rightPixelSprite").style.opacity = "1";
+            rightPixelSprite.style.backgroundImage = "url('" + rightPixelSrc + "')";
+            rightPixelSprite.style.opacity = "1";
+            
+            // Mobile positioning
+            if (window.innerWidth <= 768 && mobileRightButton) {
+                // Move the sprite to be inside the mobile right button
+                rightPixelSprite.style.position = "absolute";
+                rightPixelSprite.style.right = "50%";
+                rightPixelSprite.style.transform = "translateX(50%)";
+                mobileRightButton.appendChild(rightPixelSprite);
+            }
         }
     }
 
@@ -57,6 +81,19 @@ document.addEventListener('DOMContentLoaded', function() {
         // Hide pixel sprites
         document.getElementById("leftPixelSprite").style.opacity = "0";
         document.getElementById("rightPixelSprite").style.opacity = "0";
+        
+        // Reset sprite positioning
+        const leftPixelSprite = document.getElementById("leftPixelSprite");
+        const rightPixelSprite = document.getElementById("rightPixelSprite");
+        
+        // Move sprites back to the fullImageOverlay if they were moved
+        if (leftPixelSprite.parentElement !== document.getElementById("fullImageOverlay")) {
+            document.getElementById("fullImageOverlay").appendChild(leftPixelSprite);
+        }
+        
+        if (rightPixelSprite.parentElement !== document.getElementById("fullImageOverlay")) {
+            document.getElementById("fullImageOverlay").appendChild(rightPixelSprite);
+        }
     };
 
     // Function to start dragging on mouse down
@@ -249,8 +286,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Resize handling
     function handleResize() {
-        // Check if we're on mobile and set appropriate classes or styles
-        const isMobile = window.innerWidth <= 768;
+        // Check if overlay is visible and reposition sprites accordingly
+        if (document.getElementById("fullImageOverlay").style.display === "flex") {
+            // Re-trigger profile display to reposition sprites
+            const characterProfile = characterBoxes[currentCharacterIndex].dataset.profile;
+            if (characterProfile) {
+                showFullProfile(characterProfile);
+            }
+        }
     }
     
     window.addEventListener('resize', handleResize);

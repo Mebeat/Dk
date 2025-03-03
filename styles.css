@@ -199,6 +199,8 @@ html {
     justify-content: center;
     cursor: pointer;
     user-select: none;
+    position: relative;  /* Added to position the pixel sprites relative to buttons */
+    padding: 0 15px;     /* Added padding for pixel sprites */
 }
 
 /* Pixel sprites */
@@ -210,7 +212,7 @@ html {
     background-repeat: no-repeat;
     opacity: 0;
     transition: opacity 0.5s ease;
-    z-index: 10002; /* Increased z-index to be above mobile navigation */
+    z-index: 10002;
 }
 
 #leftPixelSprite {
@@ -296,19 +298,21 @@ html {
     
     #leftPixelSprite,
     #rightPixelSprite {
-        width: 40px;
-        height: 40px;
-        bottom: 80px; /* Position above the mobile navigation bar */
-        top: auto; /* Override the default top positioning */
-        transform: none; /* Remove vertical centering since we're positioning from bottom */
+        position: absolute;
+        width: 50px;  /* Larger size */
+        height: 50px;  /* Larger size */
+        top: -45px;  /* Position above the buttons */
+        transform: none;
     }
     
     #leftPixelSprite {
-        left: 20px;
+        left: 50%;
+        transform: translateX(-50%);  /* Center horizontally */
     }
     
     #rightPixelSprite {
-        right: 20px;
+        right: 50%;
+        transform: translateX(50%);  /* Center horizontally */
     }
     
     /* Show mobile nav and hide desktop nav buttons */
@@ -352,17 +356,9 @@ html {
     
     #leftPixelSprite,
     #rightPixelSprite {
-        width: 30px;
-        height: 30px;
-        bottom: 70px; /* Adjusted for smaller screens */
-    }
-    
-    #leftPixelSprite {
-        left: 15px;
-    }
-    
-    #rightPixelSprite {
-        right: 15px;
+        width: 40px;  /* Smaller for very small screens but still bigger than original */
+        height: 40px;
+        top: -40px;
     }
     
     .social-media-icon {
