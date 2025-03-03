@@ -3,92 +3,93 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f0f0f0;
-    overflow-x: hidden !important; /* Hide horizontal scrollbar */
-    overflow-y: auto !important; /* Enable vertical scrollbar */}
+    overflow-x: hidden;
+    background-image: url('background.gif');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
 
 .container {
-    width: 80%;
+    width: 90%;
+    max-width: 1200px;
     margin: 0 auto;
-    padding-top: 20px;
-    overflow: hidden; /* Hide both vertical and horizontal scrollbars */
+    padding: 20px 0;
 }
 
 .logo {
     text-align: center;
-    margin-bottom: 40px; /* Increased space between logo and characters */
-    position: relative; /* Ensure relative positioning */
+    margin-bottom: 40px;
+    position: relative;
 }
 
 .logo img {
-    width: 350px;
-    height: auto;
-}
-
-.logo-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
+    max-width: 350px;
     width: 100%;
-    height: 100%;
-    cursor: default; /* Prevent the pointer from changing to text selection */
-    background: transparent; /* Make the overlay transparent */
-    z-index: 1; /* Ensure it sits above the logo */
+    height: auto;
 }
 
 .social-media-icons {
     position: absolute;
-    top: 20px; /* Adjust distance from the top */
-    right: 20px; /* Adjust distance from the right */
+    top: 20px;
+    right: 20px;
+    z-index: 10;
 }
 
 .social-media-icon {
-    width: 50px; /* Adjust size as needed */
+    width: 40px;
     height: auto;
-    margin-right: 10px; /* Adjust margin as needed */
+    margin-left: 10px;
 }
 
 .header {
     text-align: center;
-    margin-bottom: 20px; /* Adjust margin as needed */
+    margin-bottom: 20px;
 }
 
 .header-text {
-    font-size: 45px; /* Adjust font size as needed */
+    font-size: 2.5rem;
     text-decoration: underline;
-    text-decoration-thickness: 2px; /* Set the thickness of the underline */
+    text-decoration-thickness: 2px;
     text-underline-offset: 8px;
-    font-family: 'Roboto Condensed', Arial, sans-serif; /* Specify the font family */
     font-weight: 350;
-    user-select: none; /* Prevent selection for characters and their images */
+    user-select: none;
+    color: white;
 }
 
 .characters-wrapper {
-    overflow: hidden; /* Hide both vertical and horizontal scrollbars */
-    padding-top: 40px; /* Add padding to the top to prevent cropping */
-    height: 490px; /* Increase height to accommodate the staggered characters */
+    overflow: hidden;
+    width: 100%;
+    padding: 20px 0;
+    position: relative;
 }
 
 .characters {
     display: flex;
+    flex-wrap: nowrap;
+    padding: 40px 0;
+    transition: transform 0.3s ease;
 }
 
 .character {
     flex: 0 0 auto;
-    width: 300px;
-    height: 450px;
+    width: 250px;
+    height: 375px;
     margin-right: 20px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     position: relative;
+    transition: transform 0.3s ease;
+    cursor: pointer;
 }
 
 .character:nth-child(odd) {
-    margin-top: -20px; /* Move odd items up */
+    transform: translateY(-20px);
 }
 
 .character:nth-child(even) {
-    margin-top: 20px; /* Move even items down */
+    transform: translateY(20px);
 }
 
 .character img {
@@ -96,30 +97,16 @@ body {
     height: 100%;
     object-fit: cover;
     transition: filter 0.3s ease, transform 0.3s ease;
-    filter: saturate(50%); /* Reduced saturation by default */
-    user-select: none; /* Prevent selection for characters and their images */
+    filter: saturate(50%);
+    user-select: none;
 }
 
 .character:hover img {
-    filter: saturate(100%); /* Increased saturation on hover */
-    transform: scale(1.1); /* Enlarge the image a bit more on hover */
-    cursor: pointer; /* Change cursor to pointer on hover */
+    filter: saturate(100%);
+    transform: scale(1.1);
 }
 
-.pixel-sprite {
-    position: fixed;
-    width: 60px; /* Adjust size as needed */
-    height: 60px; /* Adjust size as needed */
-    background-size: cover;
-    background-repeat: no-repeat;
-    opacity: 0;
-    transition: opacity 0.5s ease; /* Smooth transition for showing/hiding */
-    z-index: 10000; /* Ensure it sits above other elements */
-}
-
-
-
-/* New styles for full image overlay */
+/* Full image overlay */
 #fullImageOverlay {
     display: none;
     position: fixed;
@@ -127,14 +114,14 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.99); /* Dark background color */
+    background-color: rgba(0, 0, 0, 0.99);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    z-index: 9999; /* Ensure it's on top of everything */
+    z-index: 9999;
     opacity: 0;
-    animation: fadeIn 0.5s forwards; /* Apply fade-in animation */
-    cursor: default; /* Default cursor */
+    animation: fadeIn 0.5s forwards;
+    cursor: default;
 }
 
 #fullImageContainer {
@@ -142,89 +129,104 @@ body {
     justify-content: center;
     align-items: center;
     height: 100%;
+    position: relative;
 }
 
-#leftPixelSprite {
-    left: 20px; /* Position near the left edge */
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%);
-}
-
-#rightPixelSprite {
-    right: 20px; /* Position near the right edge */
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%);
-}
-.arrows {
-    position: absolute;
-    top: calc(50% - 10px); /* Adjust position vertically */
-}
-
-.arrow-left, .arrow-right {
-    width: 0;
-    height: 0;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    cursor: pointer;
-}
-
-.arrow-left {
-    border-right: 10px solid #000; /* Adjust color and size as needed */
-    margin-right: 10px; /* Adjust spacing between arrows */
-}
-
-.arrow-right {
-    border-left: 10px solid #000; /* Adjust color and size as needed */
-    margin-left: 10px; /* Adjust spacing between arrows */
-}
 #closeButton {
-    font-size: 40px; /* Increase close button size */
+    font-size: 40px;
     color: #fff;
     position: absolute;
     top: 20px;
     right: 20px;
     cursor: pointer;
-    user-select: none; /* Prevent text selection */
+    user-select: none;
     opacity: 0;
-    animation: fadeIn 0.5s 0.3s forwards; /* Apply fade-in animation with delay */
+    animation: fadeIn 0.5s 0.3s forwards;
+    z-index: 10001;
 }
 
-/* Add borders with different colors to each character */
+/* Navigation buttons */
+.nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 3rem;
+    color: white;
+    cursor: pointer;
+    z-index: 10001;
+    opacity: 0;
+    animation: fadeIn 0.5s 0.3s forwards;
+    user-select: none;
+    padding: 20px;
+}
+
+.left-button {
+    left: 20px;
+}
+
+.right-button {
+    right: 20px;
+}
+
+/* Pixel sprites */
+.pixel-sprite {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 10000;
+}
+
+#leftPixelSprite {
+    left: 90px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#rightPixelSprite {
+    right: 90px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Character borders */
 .character:nth-child(1) {
-    border: 2px solid #652e2d; /* First character */
+    border: 2px solid #652e2d;
 }
 
 .character:nth-child(2) {
-    border: 2px solid #5f6b85; /* Second character */
+    border: 2px solid #5f6b85;
 }
 
 .character:nth-child(3) {
-    border: 2px solid #82392d; /* Third character */
+    border: 2px solid #82392d;
 }
 
 .character:nth-child(4) {
-    border: 2px solid #d66047; /* Fourth character */
+    border: 2px solid #d66047;
 }
 
 .character:nth-child(5) {
-    border: 2px solid #c6c6c6; /* Fifth character */
+    border: 2px solid #c6c6c6;
 }
 
 .character:nth-child(6) {
     border: 2px solid;
-    border-image: linear-gradient(-45deg, #6f2234, #57426e) 1; /* Sixth character */
+    border-image: linear-gradient(-45deg, #6f2234, #57426e) 1;
 }
 
 .character:nth-child(7) {
-    border: 2px solid #07cc14; /* Seventh character */
+    border: 2px solid #07cc14;
 }
 
 .character:nth-child(8) {
-    border: 2px solid #6c5c53; /* Eighth character */
+    border: 2px solid #6c5c53;
 }
 
-
-/* Keyframes for fade-in animation */
+/* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -234,13 +236,107 @@ body {
     }
 }
 
-@media only screen and (max-width: 600px) {
-    .character {
-        width: 100%; /* Make characters full width */
-        height: auto; /* Allow height to adjust according to aspect ratio */
+/* Media Queries */
+@media only screen and (max-width: 768px) {
+    .container {
+        width: 95%;
     }
+    
+    .character {
+        width: 200px;
+        height: 300px;
+        margin-right: 15px;
+    }
+    
+    .social-media-icons {
+        top: 10px;
+        right: 10px;
+    }
+    
+    .social-media-icon {
+        width: 30px;
+    }
+    
+    .header-text {
+        font-size: 2rem;
+    }
+    
+    #leftPixelSprite,
+    #rightPixelSprite {
+        width: 40px;
+        height: 40px;
+    }
+    
+    #leftPixelSprite {
+        left: 60px;
+    }
+    
+    #rightPixelSprite {
+        right: 60px;
+    }
+    
+    .nav-button {
+        font-size: 2rem;
+    }
+}
 
-    .talent-overlay img {
-        max-width: 50%; /* Adjust maximum width of overlay images */
+@media only screen and (max-width: 480px) {
+    .character {
+        width: 150px;
+        height: 225px;
+        margin-right: 10px;
+    }
+    
+    .character:nth-child(odd) {
+        transform: translateY(-10px);
+    }
+    
+    .character:nth-child(even) {
+        transform: translateY(10px);
+    }
+    
+    .header-text {
+        font-size: 1.5rem;
+    }
+    
+    .logo img {
+        max-width: 250px;
+    }
+    
+    #closeButton {
+        font-size: 30px;
+        top: 10px;
+        right: 10px;
+    }
+    
+    #leftPixelSprite,
+    #rightPixelSprite {
+        width: 30px;
+        height: 30px;
+    }
+    
+    #leftPixelSprite {
+        left: 50px;
+    }
+    
+    #rightPixelSprite {
+        right: 50px;
+    }
+    
+    .nav-button {
+        font-size: 1.5rem;
+        padding: 10px;
+    }
+    
+    .left-button {
+        left: 10px;
+    }
+    
+    .right-button {
+        right: 10px;
+    }
+    
+    .social-media-icon {
+        width: 25px;
     }
 }
