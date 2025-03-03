@@ -210,7 +210,7 @@ html {
     background-repeat: no-repeat;
     opacity: 0;
     transition: opacity 0.5s ease;
-    z-index: 10000;
+    z-index: 10002; /* Increased z-index to be above mobile navigation */
 }
 
 #leftPixelSprite {
@@ -298,14 +298,17 @@ html {
     #rightPixelSprite {
         width: 40px;
         height: 40px;
+        bottom: 80px; /* Position above the mobile navigation bar */
+        top: auto; /* Override the default top positioning */
+        transform: none; /* Remove vertical centering since we're positioning from bottom */
     }
     
     #leftPixelSprite {
-        left: 60px;
+        left: 20px;
     }
     
     #rightPixelSprite {
-        right: 60px;
+        right: 20px;
     }
     
     /* Show mobile nav and hide desktop nav buttons */
@@ -351,14 +354,15 @@ html {
     #rightPixelSprite {
         width: 30px;
         height: 30px;
+        bottom: 70px; /* Adjusted for smaller screens */
     }
     
     #leftPixelSprite {
-        left: 50px;
+        left: 15px;
     }
     
     #rightPixelSprite {
-        right: 50px;
+        right: 15px;
     }
     
     .social-media-icon {
