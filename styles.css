@@ -235,43 +235,38 @@ html {
     transform: translateY(-50%);
 }
 
-/* Character borders - Only for original characters (1-8) */
-.character:nth-child(1) {
+/* Character borders - Repeating pattern for seamless infinite scroll */
+.character:nth-child(8n+1) {
     border: 2px solid #652e2d;
 }
 
-.character:nth-child(2) {
+.character:nth-child(8n+2) {
     border: 2px solid #5f6b85;
 }
 
-.character:nth-child(3) {
+.character:nth-child(8n+3) {
     border: 2px solid #82392d;
 }
 
-.character:nth-child(4) {
+.character:nth-child(8n+4) {
     border: 2px solid #d66047;
 }
 
-.character:nth-child(5) {
+.character:nth-child(8n+5) {
     border: 2px solid #c6c6c6;
 }
 
-.character:nth-child(6) {
+.character:nth-child(8n+6) {
     border: 2px solid;
     border-image: linear-gradient(-45deg, #6f2234, #57426e) 1;
 }
 
-.character:nth-child(7) {
+.character:nth-child(8n+7) {
     border: 2px solid #07cc14;
 }
 
-.character:nth-child(8) {
+.character:nth-child(8n+8) {
     border: 2px solid #6c5c53;
-}
-
-/* Duplicated characters (9+) should have no colored borders */
-.character:nth-child(n+9) {
-    border: 2px solid transparent;
 }
 
 /* Animations */

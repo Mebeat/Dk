@@ -33,12 +33,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // Duplicate characters for seamless infinite scroll
     function duplicateCharacters() {
         const originalCharacters = Array.from(characterBoxes);
-        originalCharacters.forEach(character => {
-            const clone = character.cloneNode(true);
-            charactersContainer.appendChild(clone);
-        });
+        // Create multiple copies for smoother infinite scroll
+        for (let i = 0; i < 3; i++) {
+            originalCharacters.forEach(character => {
+                const clone = character.cloneNode(true);
+                charactersContainer.appendChild(clone);
+            });
+        }
         
-        // Add event listeners to cloned characters
+        // Add event listeners to all characters (original and cloned)
         const allCharacters = document.querySelectorAll('.character');
         allCharacters.forEach((box, index) => {
             box.addEventListener('click', (e) => {
@@ -61,11 +64,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Auto-scroll animation
     function autoScroll() {
         if (!isDragging && !isHovering) {
-            const maxScroll = charactersContainer.scrollWidth / 2;
+            const containerWidth = charactersContainer.scrollWidth;
+            const oneSetWidth = containerWidth / 4; // Since we have 4 copies now
+            
             lastScrollPosition += scrollSpeed;
             
-            if (lastScrollPosition >= maxScroll) {
-                lastScrollPosition = 0;
+            // Seamless reset when reaching the end of first set
+            if (lastScrollPosition >= oneSetWidth) {
+                lastScrollPosition = lastScrollPosition - oneSetWidth;
             }
             
             charactersWrapper.scrollLeft = lastScrollPosition;
@@ -201,21 +207,24 @@ document.addEventListener('DOMContentLoaded', function() {
             x = e.pageX;
         }
         
-        const walk = (x - startX); // Removed multiplier for 1:1 movement
-        const newScrollPosition = scrollLeft - walk;
+        const walk = (x - startX); // 1:1 movement
+        let newScrollPosition = scrollLeft - walk;
         
-        // Handle infinite scroll boundaries
-        const maxScroll = charactersContainer.scrollWidth / 2;
+        // Handle seamless infinite scroll boundaries
+        const containerWidth = charactersContainer.scrollWidth;
+        const oneSetWidth = containerWidth / 4; // Since we have 4 copies now
+        
+        // Seamless wrapping for manual scrolling
         if (newScrollPosition < 0) {
-            charactersWrapper.scrollLeft = maxScroll + newScrollPosition;
-            lastScrollPosition = maxScroll + newScrollPosition;
-        } else if (newScrollPosition >= maxScroll) {
-            charactersWrapper.scrollLeft = newScrollPosition - maxScroll;
-            lastScrollPosition = newScrollPosition - maxScroll;
-        } else {
-            charactersWrapper.scrollLeft = newScrollPosition;
-            lastScrollPosition = newScrollPosition;
+            newScrollPosition += oneSetWidth;
+            scrollLeft += oneSetWidth;
+        } else if (newScrollPosition >= oneSetWidth * 3) { // Before the last set
+            newScrollPosition -= oneSetWidth;
+            scrollLeft -= oneSetWidth;
         }
+        
+        charactersWrapper.scrollLeft = newScrollPosition;
+        lastScrollPosition = newScrollPosition;
         
         if (Math.abs(walk) > 5) {
             clickPrevented = true;
