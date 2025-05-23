@@ -235,7 +235,7 @@ html {
     transform: translateY(-50%);
 }
 
-/* Character borders - Repeating pattern for seamless infinite scroll */
+/* Character borders - Characters 1-8 (original) */
 .character:nth-child(8n+1) {
     border: 2px solid #652e2d;
 }
@@ -267,6 +267,40 @@ html {
 
 .character:nth-child(8n+8) {
     border: 2px solid #6c5c53;
+}
+
+/* Character borders - Characters 9-16 (new color palette) */
+.character:nth-child(n+9):nth-child(-n+16):nth-child(8n+1) {
+    border: 2px solid #4a90e2; /* Blue */
+}
+
+.character:nth-child(n+9):nth-child(-n+16):nth-child(8n+2) {
+    border: 2px solid #f5a623; /* Orange */
+}
+
+.character:nth-child(n+9):nth-child(-n+16):nth-child(8n+3) {
+    border: 2px solid #7ed321; /* Green */
+}
+
+.character:nth-child(n+9):nth-child(-n+16):nth-child(8n+4) {
+    border: 2px solid #d0021b; /* Red */
+}
+
+.character:nth-child(n+9):nth-child(-n+16):nth-child(8n+5) {
+    border: 2px solid #9013fe; /* Purple */
+}
+
+.character:nth-child(n+9):nth-child(-n+16):nth-child(8n+6) {
+    border: 2px solid;
+    border-image: linear-gradient(-45deg, #50e3c2, #4a90e2) 1; /* Teal to Blue gradient */
+}
+
+.character:nth-child(n+9):nth-child(-n+16):nth-child(8n+7) {
+    border: 2px solid #b8e986; /* Light Green */
+}
+
+.character:nth-child(n+9):nth-child(-n+16):nth-child(8n+8) {
+    border: 2px solid #bd10e0; /* Magenta */
 }
 
 /* Animations */
@@ -349,7 +383,7 @@ html {
     }
     
     .character:nth-child(even) {
-        transform: translateY(10px);
+        transform: translateY(20px);
     }
     
     .header-text {
