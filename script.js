@@ -4,11 +4,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const characterBoxes = document.querySelectorAll('.character');
     let currentCharacterIndex = 0;
     let isDragging = false;
+    let isHovering = false;
     let startX;
     let scrollLeft;
     let clickPrevented = false;
     let touchStartX;
     let touchStartTime;
+    let animationId;
+    let scrollSpeed = 0.5; // Pixels per frame for auto-scroll
+    let lastScrollPosition = 0;
 
     // Preload profile images
     const profileImages = [];
@@ -25,6 +29,49 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('load', function() {
         document.body.style.backgroundImage = 'url("background.gif")';
     });
+
+    // Duplicate characters for seamless infinite scroll
+    function duplicateCharacters() {
+        const originalCharacters = Array.from(characterBoxes);
+        originalCharacters.forEach(character => {
+            const clone = character.cloneNode(true);
+            charactersContainer.appendChild(clone);
+        });
+        
+        // Add event listeners to cloned characters
+        const allCharacters = document.querySelectorAll('.character');
+        allCharacters.forEach((box, index) => {
+            box.addEventListener('click', (e) => {
+                if (!clickPrevented) {
+                    currentCharacterIndex = index % characterBoxes.length;
+                    const characterProfile = box.dataset.profile;
+                    if (characterProfile) {
+                        showFullProfile(characterProfile);
+                    }
+                }
+            });
+
+            // Prevent right-click menu
+            box.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+            });
+        });
+    }
+
+    // Auto-scroll animation
+    function autoScroll() {
+        if (!isDragging && !isHovering) {
+            const maxScroll = charactersContainer.scrollWidth / 2;
+            lastScrollPosition += scrollSpeed;
+            
+            if (lastScrollPosition >= maxScroll) {
+                lastScrollPosition = 0;
+            }
+            
+            charactersWrapper.scrollLeft = lastScrollPosition;
+        }
+        animationId = requestAnimationFrame(autoScroll);
+    }
 
     // Function to show full profile image on click
     function showFullProfile(profileSrc) {
@@ -49,7 +96,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Mobile positioning
             if (window.innerWidth <= 768 && mobileLeftButton) {
-                // Move the sprite to be inside the mobile left button
                 leftPixelSprite.style.position = "absolute";
                 leftPixelSprite.style.left = "50%";
                 leftPixelSprite.style.transform = "translateX(-50%)";
@@ -63,7 +109,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Mobile positioning
             if (window.innerWidth <= 768 && mobileRightButton) {
-                // Move the sprite to be inside the mobile right button
                 rightPixelSprite.style.position = "absolute";
                 rightPixelSprite.style.right = "50%";
                 rightPixelSprite.style.transform = "translateX(50%)";
@@ -102,12 +147,14 @@ document.addEventListener('DOMContentLoaded', function() {
             touchStartX = e.touches[0].pageX;
             touchStartTime = new Date().getTime();
             startX = touchStartX;
+            isHovering = true; // Touch acts as hover
         } else {
             startX = e.pageX;
         }
         
         isDragging = true;
         scrollLeft = charactersWrapper.scrollLeft;
+        lastScrollPosition = scrollLeft;
         clickPrevented = false;
         
         if (e.type !== 'touchstart') {
@@ -129,9 +176,13 @@ document.addEventListener('DOMContentLoaded', function() {
             // If it was a quick tap with minimal movement, count it as a click
             if (timeDiff < 250 && distanceMoved < 10) {
                 clickPrevented = false;
+                isHovering = false;
             } else {
                 clickPrevented = true;
-                setTimeout(() => { clickPrevented = false; }, 100);
+                setTimeout(() => { 
+                    clickPrevented = false; 
+                    isHovering = false;
+                }, 100);
             }
         } else {
             setTimeout(() => { clickPrevented = false; }, 100);
@@ -145,17 +196,40 @@ document.addEventListener('DOMContentLoaded', function() {
         let x;
         if (e.type === 'touchmove') {
             x = e.touches[0].pageX;
-            // Prevent screen from scrolling when swiping characters
             e.preventDefault();
         } else {
             x = e.pageX;
         }
         
-        const walk = (x - startX) * 1.5; // Adjust this multiplier to change scroll speed
-        charactersWrapper.scrollLeft = scrollLeft - walk;
+        const walk = (x - startX); // Removed multiplier for 1:1 movement
+        const newScrollPosition = scrollLeft - walk;
+        
+        // Handle infinite scroll boundaries
+        const maxScroll = charactersContainer.scrollWidth / 2;
+        if (newScrollPosition < 0) {
+            charactersWrapper.scrollLeft = maxScroll + newScrollPosition;
+            lastScrollPosition = maxScroll + newScrollPosition;
+        } else if (newScrollPosition >= maxScroll) {
+            charactersWrapper.scrollLeft = newScrollPosition - maxScroll;
+            lastScrollPosition = newScrollPosition - maxScroll;
+        } else {
+            charactersWrapper.scrollLeft = newScrollPosition;
+            lastScrollPosition = newScrollPosition;
+        }
         
         if (Math.abs(walk) > 5) {
             clickPrevented = true;
+        }
+    }
+
+    // Mouse hover handlers
+    function handleMouseEnter() {
+        isHovering = true;
+    }
+
+    function handleMouseLeave() {
+        if (!isDragging) {
+            isHovering = false;
         }
     }
 
@@ -170,29 +244,15 @@ document.addEventListener('DOMContentLoaded', function() {
     charactersWrapper.addEventListener('touchmove', dragMove, { passive: false });
     
     charactersWrapper.addEventListener('mouseleave', dragEnd);
-
-    // Add click event listeners to character boxes
-    characterBoxes.forEach((box, index) => {
-        box.addEventListener('click', (e) => {
-            if (!clickPrevented) {
-                currentCharacterIndex = index;
-                const characterProfile = box.dataset.profile;
-                if (characterProfile) {
-                    showFullProfile(characterProfile);
-                }
-            }
-        });
-
-        // Prevent right-click menu
-        box.addEventListener('contextmenu', (e) => {
-            e.preventDefault();
-        });
-    });
+    
+    // Add hover event listeners
+    charactersWrapper.addEventListener('mouseenter', handleMouseEnter);
+    charactersWrapper.addEventListener('mouseleave', handleMouseLeave);
 
     // Function to show the next character
     function showNextCharacter(e) {
         if (e) {
-            e.stopPropagation(); // Prevent event from bubbling to overlay
+            e.stopPropagation();
         }
         currentCharacterIndex = (currentCharacterIndex + 1) % characterBoxes.length;
         const characterProfile = characterBoxes[currentCharacterIndex].dataset.profile;
@@ -204,7 +264,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to show the previous character
     function showPreviousCharacter(e) {
         if (e) {
-            e.stopPropagation(); // Prevent event from bubbling to overlay
+            e.stopPropagation();
         }
         currentCharacterIndex = (currentCharacterIndex - 1 + characterBoxes.length) % characterBoxes.length;
         const characterProfile = characterBoxes[currentCharacterIndex].dataset.profile;
@@ -228,12 +288,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (mobileLeftButton && mobileRightButton) {
         mobileLeftButton.addEventListener('click', function(e) {
-            e.stopPropagation(); // Prevent closing the overlay
+            e.stopPropagation();
             showPreviousCharacter();
         });
         
         mobileRightButton.addEventListener('click', function(e) {
-            e.stopPropagation(); // Prevent closing the overlay
+            e.stopPropagation();
             showNextCharacter();
         });
     }
@@ -268,27 +328,26 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!touchStartXOverlay || !touchEndXOverlay) return;
         
         const swipeDistance = touchEndXOverlay - touchStartXOverlay;
-        const minSwipeDistance = 50; // Minimum distance required for a swipe
+        const minSwipeDistance = 50;
         
         if (swipeDistance > minSwipeDistance) {
-            // Swiped right, show previous character
             showPreviousCharacter();
         } else if (swipeDistance < -minSwipeDistance) {
-            // Swiped left, show next character
             showNextCharacter();
         }
     }
     
     // Prevent mobile navigation container from closing the overlay when clicked
-    document.querySelector('.mobile-nav-container').addEventListener('click', function(e) {
-        e.stopPropagation();
-    });
+    const mobileNavContainer = document.querySelector('.mobile-nav-container');
+    if (mobileNavContainer) {
+        mobileNavContainer.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
     
     // Resize handling
     function handleResize() {
-        // Check if overlay is visible and reposition sprites accordingly
         if (document.getElementById("fullImageOverlay").style.display === "flex") {
-            // Re-trigger profile display to reposition sprites
             const characterProfile = characterBoxes[currentCharacterIndex].dataset.profile;
             if (characterProfile) {
                 showFullProfile(characterProfile);
@@ -297,5 +356,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     window.addEventListener('resize', handleResize);
-    handleResize(); // Call once on load
+    
+    // Initialize the enhanced functionality
+    duplicateCharacters();
+    handleResize();
+    
+    // Start auto-scroll animation
+    autoScroll();
 });
