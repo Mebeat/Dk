@@ -62,6 +62,25 @@ html {
     font-weight: 350;
     user-select: none;
     color: white;
+    position: relative;
+    display: inline-block;
+    padding: 20px 40px;
+}
+
+.header-text::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -20px;
+    right: -20px;
+    bottom: -10px;
+    background-image: url('header-background.png'); /* Replace with your desired image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    z-index: -1;
+    border-radius: 10px;
 }
 
 .characters-wrapper {
@@ -336,6 +355,14 @@ html {
     
     .header-text {
         font-size: 2rem;
+        padding: 15px 30px;
+    }
+    
+    .header-text::before {
+        top: -8px;
+        left: -15px;
+        right: -15px;
+        bottom: -8px;
     }
     
     .characters-wrapper {
@@ -388,6 +415,14 @@ html {
     
     .header-text {
         font-size: 1.5rem;
+        padding: 10px 20px;
+    }
+    
+    .header-text::before {
+        top: -5px;
+        left: -10px;
+        right: -10px;
+        bottom: -5px;
     }
     
     .logo img {
