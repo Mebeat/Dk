@@ -85,7 +85,8 @@ html {
 
 .characters-wrapper {
     overflow: hidden;
-    width: 100%;
+    width: 100vw; /* Full viewport width */
+    margin-left: calc(-50vw + 50%); /* Extend to full screen width */
     padding: 20px 0;
     position: relative;
     cursor: grab;
@@ -97,13 +98,13 @@ html {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 90%;
-    height: 400px; 
-    background-image: url('character-container-bg.png');
-    background-size: contain;
+    width: 100vw; /* Full screen width to match wrapper */
+    height: 500px; /* Larger, more visible height */
+    background-image: url('character-container-bg.png'); /* Replace with your background image */
+    background-size: cover; /* Cover the full area */
     background-position: center;
     background-repeat: no-repeat;
-    z-index: 0; 
+    z-index: 0; /* Behind everything */
     pointer-events: none;
 }
 
@@ -112,13 +113,13 @@ html {
     position: fixed;
     top: 0;
     left: 0;
-    width: 300px;
+    width: 150px; /* Smaller, more appropriate size */
     height: 100vh;
-    background-image: url('left-gradient.png');
+    background-image: url('left-gradient.png'); /* Replace with your left gradient image */
     background-size: cover;
-    background-position: center right;
+    background-position: center right; /* Align to fade towards the center */
     background-repeat: no-repeat;
-    z-index: 10;
+    z-index: 10; /* Above characters but below overlays */
     pointer-events: none;
 }
 
@@ -127,13 +128,13 @@ html {
     position: fixed;
     top: 0;
     right: 0;
-    width: 300px;
+    width: 150px; /* Smaller, more appropriate size */
     height: 100vh;
-    background-image: url('right-gradient.png'); 
+    background-image: url('right-gradient.png'); /* Replace with your right gradient image */
     background-size: cover;
-    background-position: center left;
+    background-position: center left; /* Align to fade towards the center */
     background-repeat: no-repeat;
-    z-index: 10;
+    z-index: 10; /* Above characters but below overlays */
     pointer-events: none;
 }
 
