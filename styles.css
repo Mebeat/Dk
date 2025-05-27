@@ -22,6 +22,8 @@ html {
     max-width: 1400px;
     margin: 0 auto;
     padding: 20px 0;
+    position: relative;
+    z-index: 1;
 }
 
 .logo {
@@ -40,7 +42,7 @@ html {
     position: absolute;
     top: 20px;
     right: 20px;
-    z-index: 10;
+    z-index: 100;
 }
 
 .social-media-icon {
@@ -74,7 +76,7 @@ html {
     left: -40px;
     right: -40px;
     bottom: -20px;
-    background-image: url('header-background.png'); /* Replace with your desired image */
+    background-image: url('header-background.png');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -85,56 +87,58 @@ html {
 
 .characters-wrapper {
     overflow: hidden;
-    width: 100vw; /* Full viewport width */
-    margin-left: calc(-50vw + 50%); /* Extend to full screen width */
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
     padding: 20px 0;
     position: relative;
     cursor: grab;
+    z-index: 5; /* Higher than background, lower than gradients */
 }
 
-/* Character container background (behind the characters-wrapper) */
+/* Character container background - positioned absolutely behind the wrapper */
 .characters-container-bg {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100vw; /* Full screen width to match wrapper */
-    height: 500px; /* Larger, more visible height */
-    background-image: url('character-container-bg.png'); /* Replace with your background image */
-    background-size: cover; /* Cover the full area */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('character-container-bg.png');
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    z-index: 0; /* Behind everything */
+    z-index: 1; /* Behind characters but visible */
     pointer-events: none;
 }
 
-/* Left gradient overlay - fixed to screen edge */
+/* Left gradient overlay - fixed to screen edge with higher z-index */
 .left-gradient-overlay {
     position: fixed;
     top: 0;
     left: 0;
-    width: 150px; /* Smaller, more appropriate size */
+    width: 150px;
     height: 100vh;
-    background-image: url('left-gradient.png'); /* Replace with your left gradient image */
+    background: linear-gradient(to right, rgba(0,0,0,0.8), transparent); /* Fallback gradient */
+    background-image: url('left-gradient.png');
     background-size: cover;
-    background-position: center right; /* Align to fade towards the center */
+    background-position: center right;
     background-repeat: no-repeat;
-    z-index: 10; /* Above characters but below overlays */
+    z-index: 50; /* Above characters wrapper */
     pointer-events: none;
 }
 
-/* Right gradient overlay - fixed to screen edge */
+/* Right gradient overlay - fixed to screen edge with higher z-index */
 .right-gradient-overlay {
     position: fixed;
     top: 0;
     right: 0;
-    width: 150px; /* Smaller, more appropriate size */
+    width: 150px;
     height: 100vh;
-    background-image: url('right-gradient.png'); /* Replace with your right gradient image */
+    background: linear-gradient(to left, rgba(0,0,0,0.8), transparent); /* Fallback gradient */
+    background-image: url('right-gradient.png');
     background-size: cover;
-    background-position: center left; /* Align to fade towards the center */
+    background-position: center left;
     background-repeat: no-repeat;
-    z-index: 10; /* Above characters but below overlays */
+    z-index: 50; /* Above characters wrapper */
     pointer-events: none;
 }
 
@@ -146,8 +150,10 @@ html {
     display: flex;
     flex-wrap: nowrap;
     padding: 40px 0;
-    transition: none; /* Remove transition for smooth manual control */
-    will-change: transform; /* Optimize for animations */
+    transition: none;
+    will-change: transform;
+    position: relative;
+    z-index: 2; /* Above the background but below gradients */
 }
 
 .character {
@@ -179,7 +185,7 @@ html {
     transition: filter 0.3s ease, transform 0.3s ease;
     filter: saturate(50%);
     user-select: none;
-    pointer-events: none; /* Prevent image dragging */
+    pointer-events: none;
 }
 
 .character:hover img {
@@ -251,7 +257,7 @@ html {
 
 /* Bottom navigation container for mobile */
 .mobile-nav-container {
-    display: none; /* Hidden by default, shown on mobile */
+    display: none;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -337,36 +343,36 @@ html {
 
 /* Character borders - Characters 9-16 (new color palette) */
 .character:nth-child(n+9):nth-child(-n+16):nth-child(8n+1) {
-    border: 2px solid #4a90e2; /* Blue */
+    border: 2px solid #4a90e2;
 }
 
 .character:nth-child(n+9):nth-child(-n+16):nth-child(8n+2) {
-    border: 2px solid #f5a623; /* Orange */
+    border: 2px solid #f5a623;
 }
 
 .character:nth-child(n+9):nth-child(-n+16):nth-child(8n+3) {
-    border: 2px solid #7ed321; /* Green */
+    border: 2px solid #7ed321;
 }
 
 .character:nth-child(n+9):nth-child(-n+16):nth-child(8n+4) {
-    border: 2px solid #d0021b; /* Red */
+    border: 2px solid #d0021b;
 }
 
 .character:nth-child(n+9):nth-child(-n+16):nth-child(8n+5) {
-    border: 2px solid #9013fe; /* Purple */
+    border: 2px solid #9013fe;
 }
 
 .character:nth-child(n+9):nth-child(-n+16):nth-child(8n+6) {
     border: 2px solid;
-    border-image: linear-gradient(-45deg, #50e3c2, #4a90e2) 1; /* Teal to Blue gradient */
+    border-image: linear-gradient(-45deg, #50e3c2, #4a90e2) 1;
 }
 
 .character:nth-child(n+9):nth-child(-n+16):nth-child(8n+7) {
-    border: 2px solid #b8e986; /* Light Green */
+    border: 2px solid #b8e986;
 }
 
 .character:nth-child(n+9):nth-child(-n+16):nth-child(8n+8) {
-    border: 2px solid #bd10e0; /* Magenta */
+    border: 2px solid #bd10e0;
 }
 
 /* Animations */
@@ -413,7 +419,7 @@ html {
     }
     
     .characters-wrapper {
-        cursor: default; /* Default cursor on mobile */
+        cursor: default;
     }
     
     #leftPixelSprite,
@@ -435,7 +441,6 @@ html {
         transform: translateX(50%);
     }
     
-    /* Show mobile nav and hide desktop nav buttons */
     .nav-button {
         display: none;
     }
