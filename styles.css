@@ -91,6 +91,52 @@ html {
     cursor: grab;
 }
 
+/* Character container background */
+.characters-container-bg {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 39%;
+    background-image: url('character-container-bg.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Left gradient overlay */
+.left-gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 13.9%; 
+    height: 33.44%;
+    background-image: url('left-gradient.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* Right gradient overlay */
+.right-gradient-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 13.4%;
+    height: 30.78%; 
+    background-image: url('right-gradient.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 3;
+    pointer-events: none;
+}
+
 .characters-wrapper:active {
     cursor: grabbing;
 }
